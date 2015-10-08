@@ -50,7 +50,7 @@ public class ABMIniciarSesion {
 		frmIniciarSesion.getContentPane().setLayout(null);
 		
 		JLabel lblDniJugador1 = new JLabel("DNI Jugador 1");
-		lblDniJugador1.setBounds(45, 51, 76, 14);
+		lblDniJugador1.setBounds(42, 51, 76, 14);
 		frmIniciarSesion.getContentPane().add(lblDniJugador1);
 		
 		txtDNIJugador1 = new JTextField();
@@ -80,7 +80,7 @@ public class ABMIniciarSesion {
 		frmIniciarSesion.getContentPane().add(btnRegistrarse);
 		
 		JLabel lblDniJugador2 = new JLabel("DNI Jugador 2");
-		lblDniJugador2.setBounds(45, 92, 69, 14);
+		lblDniJugador2.setBounds(42, 92, 76, 14);
 		frmIniciarSesion.getContentPane().add(lblDniJugador2);
 		
 		txtDniJugador2 = new JTextField();

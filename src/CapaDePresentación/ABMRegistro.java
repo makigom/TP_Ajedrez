@@ -1,9 +1,9 @@
 package CapaDePresentación;
 
+import java.lang.String;
+
 import CapaDeEntidades.Jugador;
-
 import appExceptions.ApplicationException;
-
 import CapaDeNegocio.CtrlJugador;
 
 import java.awt.EventQueue;
@@ -12,13 +12,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
 import javax.swing.JButton;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class ABMRegistro {
 
+	private static final Exception ApplicationException = null;
 	private JFrame frmRegistrarJugador;
 	private JTextField txtDNI;
 	private JTextField txtNombre;
@@ -92,7 +93,7 @@ public class ABMRegistro {
 			public void mouseClicked(MouseEvent arg0) {
 				try {
 					guardar();
-				} catch (appExceptions.ApplicationException e) {
+				} catch (ApplicationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -135,22 +136,31 @@ public class ABMRegistro {
 	protected void mapearADatos(Jugador j){
 		txtDNI.setText(String.valueOf(j.getDni()));
 		txtNombre.setText(String.valueOf(j.getNombre()));
-		txtApellido.setText(String.valueOf(j.getDni()));
+		txtApellido.setText(String.valueOf(j.getApellido()));
 	}
 	
 	protected void guardar() throws ApplicationException{
 		Jugador j = this.mapearDeDatos();
 		try { 
-			ctrlAj.save(j);
+			
+			if() ctrlAj.save(j);
+			else throw ApplicationException;
+			
 		} catch (ApplicationException ae){
 			JOptionPane.showMessageDialog(null,"El usuario ya se encuentra registrado","Error", JOptionPane.ERROR_MESSAGE);
+		}
+		int reply = JOptionPane.showConfirmDialog(null,"¿Desea agregar un jugador mas?", "Si",JOptionPane.YES_NO_OPTION);
+		if(reply == JOptionPane.NO_OPTION){
+			ABMIniciarSesion.main(null);
+			this.frmRegistrarJugador.setVisible(false);
 		}
 	}
 	
 	private void confirmar() {
 		int reply = JOptionPane.showConfirmDialog(null, "¿Seguro que desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
 		if (reply == JOptionPane.YES_OPTION){
-			System.exit(0);
+			ABMIniciarSesion.main(null);
+			this.frmRegistrarJugador.setVisible(false);
 		}
 		
 	}

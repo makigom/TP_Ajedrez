@@ -50,14 +50,14 @@ public class DataJugador {
 		PreparedStatement stmt = null;
 		
 		try {
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into jugadores(dni, nombre, apellido) values (?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS );
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into jugadores(dni, nombre, apellido) values (?,?,?);");
 			
 			stmt.setString(1, j.getDni());
 			stmt.setString(2, j.getNombre());
 			stmt.setString(3, j.getApellido());
 			
-			rs = stmt.getGeneratedKeys();
-			}
+			stmt.execute();
+		}
 		
 		catch(SQLException e){
 			
@@ -90,10 +90,10 @@ public class DataJugador {
 		
 		try{
 			
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("update jugadores set nombre=?, apellido=? where dni=? ");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("update jugadores set nombre=?, apellido=? where dni=?;");
 			
 			stmt.setString(1, newJug.getNombre());
-			stmt.setString(2, newJug.getNombre());
+			stmt.setString(2, newJug.getApellido());
 			stmt.setString(3, newJug.getDni());
 			
 			stmt.execute();
