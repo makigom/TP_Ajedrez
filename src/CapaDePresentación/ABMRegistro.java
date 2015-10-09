@@ -20,7 +20,7 @@ import java.awt.event.MouseEvent;
 public class ABMRegistro {
 
 	private static final Exception ApplicationException = null;
-	private JFrame frmRegistrarJugador;
+	private JFrame frmRegistro;
 	private JTextField txtDNI;
 	private JTextField txtNombre;
 	private JTextField txtApellido;
@@ -35,7 +35,7 @@ public class ABMRegistro {
 			public void run() {
 				try {
 					ABMRegistro window = new ABMRegistro();
-					window.frmRegistrarJugador.setVisible(true);
+					window.frmRegistro.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,37 +54,37 @@ public class ABMRegistro {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmRegistrarJugador = new JFrame();
-		frmRegistrarJugador.setTitle("Registrar Jugador");
-		frmRegistrarJugador.setBounds(100, 100, 384, 242);
-		frmRegistrarJugador.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmRegistrarJugador.getContentPane().setLayout(null);
+		frmRegistro = new JFrame();
+		frmRegistro.setTitle("Registrar Jugador");
+		frmRegistro.setBounds(100, 100, 384, 242);
+		frmRegistro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmRegistro.getContentPane().setLayout(null);
 		
 		JLabel lblDni = new JLabel("DNI");
 		lblDni.setBounds(34, 33, 46, 14);
-		frmRegistrarJugador.getContentPane().add(lblDni);
+		frmRegistro.getContentPane().add(lblDni);
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setBounds(34, 72, 46, 14);
-		frmRegistrarJugador.getContentPane().add(lblNombre);
+		frmRegistro.getContentPane().add(lblNombre);
 		
 		JLabel lblApellido = new JLabel("Apellido");
 		lblApellido.setBounds(34, 110, 46, 14);
-		frmRegistrarJugador.getContentPane().add(lblApellido);
+		frmRegistro.getContentPane().add(lblApellido);
 		
 		txtDNI = new JTextField();
 		txtDNI.setBounds(114, 30, 128, 20);
-		frmRegistrarJugador.getContentPane().add(txtDNI);
+		frmRegistro.getContentPane().add(txtDNI);
 		txtDNI.setColumns(10);
 		
 		txtNombre = new JTextField();
 		txtNombre.setBounds(114, 69, 128, 20);
-		frmRegistrarJugador.getContentPane().add(txtNombre);
+		frmRegistro.getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		txtApellido = new JTextField();
 		txtApellido.setBounds(114, 107, 128, 20);
-		frmRegistrarJugador.getContentPane().add(txtApellido);
+		frmRegistro.getContentPane().add(txtApellido);
 		txtApellido.setColumns(10);
 		
 		JButton btnGuardar = new JButton("Guardar");
@@ -100,7 +100,7 @@ public class ABMRegistro {
 			}
 		});
 		btnGuardar.setBounds(67, 155, 89, 23);
-		frmRegistrarJugador.getContentPane().add(btnGuardar);
+		frmRegistro.getContentPane().add(btnGuardar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addMouseListener(new MouseAdapter() {
@@ -111,7 +111,7 @@ public class ABMRegistro {
 
 		});
 		btnCancelar.setBounds(199, 155, 89, 23);
-		frmRegistrarJugador.getContentPane().add(btnCancelar);
+		frmRegistro.getContentPane().add(btnCancelar);
 		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addMouseListener(new MouseAdapter() {
@@ -122,7 +122,7 @@ public class ABMRegistro {
 
 		});
 		btnBuscar.setBounds(252, 29, 89, 23);
-		frmRegistrarJugador.getContentPane().add(btnBuscar);
+		frmRegistro.getContentPane().add(btnBuscar);
 	}
 	
 	protected Jugador mapearDeDatos(){
@@ -139,12 +139,15 @@ public class ABMRegistro {
 		txtApellido.setText(String.valueOf(j.getApellido()));
 	}
 	
-	protected void guardar() throws ApplicationException{
+	protected void guardar() throws Exception{
 		Jugador j = this.mapearDeDatos();
 		try { 
 			
-			if() ctrlAj.save(j);
-			else throw ApplicationException;
+			j.getApellido().trim().isEmpty()
+			if((j.getDni().trim().length() > 0) && (j.getApellido().trim().length() > 0) && (j.getNombre().trim().length() > 0 )) 
+				ctrlAj.save(j);
+			
+			else throw new ApplicationException("vacio",null); //PREGUNTAR
 			
 		} catch (ApplicationException ae){
 			JOptionPane.showMessageDialog(null,"El usuario ya se encuentra registrado","Error", JOptionPane.ERROR_MESSAGE);
@@ -152,7 +155,7 @@ public class ABMRegistro {
 		int reply = JOptionPane.showConfirmDialog(null,"¿Desea agregar un jugador mas?", "Si",JOptionPane.YES_NO_OPTION);
 		if(reply == JOptionPane.NO_OPTION){
 			ABMIniciarSesion.main(null);
-			this.frmRegistrarJugador.setVisible(false);
+			this.frmRegistro.setVisible(false);
 		}
 	}
 	
@@ -160,7 +163,7 @@ public class ABMRegistro {
 		int reply = JOptionPane.showConfirmDialog(null, "¿Seguro que desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
 		if (reply == JOptionPane.YES_OPTION){
 			ABMIniciarSesion.main(null);
-			this.frmRegistrarJugador.setVisible(false);
+			this.frmRegistro.setVisible(false);
 		}
 		
 	}

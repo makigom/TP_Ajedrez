@@ -1,36 +1,38 @@
 package CapaDeEntidades;
 
-public abstract class Ficha 
-{
-	private int fila;
+public abstract class Ficha{
 	
-	private String columna;
-	
+	private int idFicha;
 	private boolean estado;
-
-	public int getFila() {
-		return fila;
+	private char tipoFicha;
+	private char color;
+	
+	public abstract boolean validarMovimiento();
+	public abstract boolean validarPosicion();
+	
+	public int getIdFicha() {
+		return idFicha;
 	}
-
-	public void setFila(int fila) {
-		this.fila = fila;
+	public void setIdFicha(int idFicha) {
+		this.idFicha = idFicha;
 	}
-
-	public String getColumna() {
-		return columna;
-	}
-
-	public void setColumna(String columna) {
-		this.columna = columna;
-	}
-
-	public boolean isEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
-
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
-	
-	
+	public char getTipoFicha() {
+		return tipoFicha;
+	}
+	public void setTipoFicha(char tipoFicha) {
+		this.tipoFicha = tipoFicha;
+	}
+	public char getColor() {
+		return color;
+	}
+	public void setColor(char color) {
+		this.color = color;
+	}
+
 }

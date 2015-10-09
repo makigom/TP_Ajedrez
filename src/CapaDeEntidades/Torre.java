@@ -1,6 +1,6 @@
 package CapaDeEntidades;
 
-public class Dama extends Ficha {
+public class Torre extends Ficha {
 
 	@Override
 	public boolean validarMovimiento() {
