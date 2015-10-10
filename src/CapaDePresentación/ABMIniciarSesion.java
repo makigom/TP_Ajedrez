@@ -184,6 +184,8 @@ public class ABMIniciarSesion {
 	//boton guardar todo de una en evento click
 	private void mover() {
 		// TODO Auto-generated method stub
+		//Acà habria que llamar a un metodo que valide si las posiciones de inicio y fin ingresadas
+		// se encuenran dentro del tablero, y desp de ahi, ocuparse de validar los movs dependiendo de la ficha
 		
 	}
 }
