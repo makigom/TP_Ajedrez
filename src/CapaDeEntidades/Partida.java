@@ -1,19 +1,17 @@
 package CapaDeEntidades;
 
+import java.util.ArrayList;
+
 public class Partida 
 {
 	private int idPartida;
-	private String estadoPartida;
-	private Jugador jugadorBlanco = new Jugador();
-	private Jugador jugadorNegro = new Jugador();
+	private Jugador jugadorBlanco;
+	private Jugador jugadorNegro;
 	private String turno;
+	ArrayList<Ficha> fichas ;
 
-	public String getEstadoPartida() {
-		return estadoPartida;
-	}
-
-	public void setEstadoPartida(String estadoPartida) {
-		this.estadoPartida = estadoPartida;
+	public Partida() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Jugador getJugadorBlanco() {
@@ -47,7 +45,5 @@ public class Partida
 	public void setTurno(String turno) {
 		this.turno = turno;
 	}
-	
-	
-	
+		
 }

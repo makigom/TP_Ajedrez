@@ -4,11 +4,15 @@ public abstract class Ficha{
 	
 	private int idFicha;
 	private boolean estado;
-	private char tipoFicha;
 	private char color;
 	
-	public abstract boolean validarMovimiento();
-	public abstract boolean validarPosicion();
+
+	public boolean validarMovimiento() {
+		return false;
+	}
+	public boolean validarPosicion() {
+		return false;
+	}
 	
 	public int getIdFicha() {
 		return idFicha;
@@ -22,12 +26,7 @@ public abstract class Ficha{
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
-	public char getTipoFicha() {
-		return tipoFicha;
-	}
-	public void setTipoFicha(char tipoFicha) {
-		this.tipoFicha = tipoFicha;
-	}
+
 	public char getColor() {
 		return color;
 	}

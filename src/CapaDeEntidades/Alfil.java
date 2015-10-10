@@ -1,5 +1,7 @@
 package CapaDeEntidades;
 
+import java.util.ArrayList;
+
 public class Alfil extends Ficha {
 
 	@Override
@@ -14,5 +16,9 @@ public class Alfil extends Ficha {
 		return false;
 	}
 	
+	//pasar array de tipo ficha a un metodo estatico
+	public static void setearPosiciones(ArrayList<Ficha> fichas){
+		
+	}
 
 }

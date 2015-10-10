@@ -50,13 +50,13 @@ public class DataJugador {
 		PreparedStatement stmt = null;
 		
 		try {
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into jugadores(dni, nombre, apellido) values (?,?,?);");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into jugadores(dni, nombre, apellido) values (?,?,?)");
 			
 			stmt.setString(1, j.getDni());
 			stmt.setString(2, j.getNombre());
 			stmt.setString(3, j.getApellido());
-			
 			stmt.execute();
+			
 		}
 		
 		catch(SQLException e){

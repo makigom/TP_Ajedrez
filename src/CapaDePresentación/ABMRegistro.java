@@ -25,7 +25,7 @@ public class ABMRegistro {
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	
-	private CtrlJugador ctrlAj = new CtrlJugador();
+	private CtrlJugador ctrlJug = new CtrlJugador();
 
 	/**
 	 * Launch the application.
@@ -96,6 +96,9 @@ public class ABMRegistro {
 				} catch (ApplicationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		});
@@ -143,14 +146,12 @@ public class ABMRegistro {
 		Jugador j = this.mapearDeDatos();
 		try { 
 			
-			j.getApellido().trim().isEmpty()
-			if((j.getDni().trim().length() > 0) && (j.getApellido().trim().length() > 0) && (j.getNombre().trim().length() > 0 )) 
-				ctrlAj.save(j);
-			
+			if((j.getDni().trim().isEmpty()) && (j.getApellido().trim().isEmpty()) && (j.getNombre().trim().isEmpty())) 
+				ctrlJug.save(j);
 			else throw new ApplicationException("vacio",null); //PREGUNTAR
 			
 		} catch (ApplicationException ae){
-			JOptionPane.showMessageDialog(null,"El usuario ya se encuentra registrado","Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"No se permiten campos vacios","Error", JOptionPane.ERROR_MESSAGE);
 		}
 		int reply = JOptionPane.showConfirmDialog(null,"¿Desea agregar un jugador mas?", "Si",JOptionPane.YES_NO_OPTION);
 		if(reply == JOptionPane.NO_OPTION){
@@ -169,7 +170,7 @@ public class ABMRegistro {
 	}
 	
 	private void buscar() {
-		Jugador j = ctrlAj.getByDni(txtDNI.getText());
+		Jugador j = ctrlJug.getByDni(txtDNI.getText());
 		if (j==null){
 			JOptionPane.showMessageDialog(null, "No se ha encontrado el DNI", "Error al buscar",JOptionPane.INFORMATION_MESSAGE);
 		} else {

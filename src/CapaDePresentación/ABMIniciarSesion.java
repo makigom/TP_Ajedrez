@@ -4,18 +4,34 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import CapaDeEntidades.Jugador;
+import CapaDeEntidades.Partida;
+import CapaDeEntidades.Posicion;
+import CapaDeNegocio.CtrlJugador;
+import CapaDeNegocio.CtrlPartida;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Button;
 
+import javax.swing.JSplitPane;
+
 public class ABMIniciarSesion {
 
 	private JFrame frmIniciarSesion;
-	private JTextField txtDNIJugador1;
-	private JTextField txtDniJugador2;
+	private JTextField txtBlancas;
+	private JTextField txtNegras;
 
+	private CtrlJugador ctrlJug = new CtrlJugador();
+	private CtrlPartida ctrlPart = new CtrlPartida();
+	private Posicion pos = new Posicion();
+	private JTextField txtOrigen;
+	private JTextField txtDestino;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -45,18 +61,18 @@ public class ABMIniciarSesion {
 	private void initialize() {
 		frmIniciarSesion = new JFrame();
 		frmIniciarSesion.setTitle("Iniciar Sesi\u00F3n Jugadores");
-		frmIniciarSesion.setBounds(100, 100, 424, 208);
+		frmIniciarSesion.setBounds(100, 100, 408, 374);
 		frmIniciarSesion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmIniciarSesion.getContentPane().setLayout(null);
 		
-		JLabel lblDniJugador1 = new JLabel("DNI Jugador 1");
-		lblDniJugador1.setBounds(42, 51, 76, 14);
-		frmIniciarSesion.getContentPane().add(lblDniJugador1);
+		JLabel lblBlancas = new JLabel("Blancas:");
+		lblBlancas.setBounds(42, 51, 76, 14);
+		frmIniciarSesion.getContentPane().add(lblBlancas);
 		
-		txtDNIJugador1 = new JTextField();
-		txtDNIJugador1.setBounds(149, 48, 132, 20);
-		frmIniciarSesion.getContentPane().add(txtDNIJugador1);
-		txtDNIJugador1.setColumns(10);
+		txtBlancas = new JTextField();
+		txtBlancas.setBounds(149, 48, 132, 20);
+		frmIniciarSesion.getContentPane().add(txtBlancas);
+		txtBlancas.setColumns(10);
 		
 		JButton btnIngresar = new JButton("Ingresar");
 		btnIngresar.addMouseListener(new MouseAdapter() {
@@ -79,25 +95,95 @@ public class ABMIniciarSesion {
 		btnRegistrarse.setBounds(192, 127, 89, 23);
 		frmIniciarSesion.getContentPane().add(btnRegistrarse);
 		
-		JLabel lblDniJugador2 = new JLabel("DNI Jugador 2");
-		lblDniJugador2.setBounds(42, 92, 76, 14);
-		frmIniciarSesion.getContentPane().add(lblDniJugador2);
+		JLabel lblNegras = new JLabel("Negras:");
+		lblNegras.setBounds(42, 92, 76, 14);
+		frmIniciarSesion.getContentPane().add(lblNegras);
 		
-		txtDniJugador2 = new JTextField();
-		txtDniJugador2.setBounds(149, 89, 132, 20);
-		frmIniciarSesion.getContentPane().add(txtDniJugador2);
-		txtDniJugador2.setColumns(10);
+		txtNegras = new JTextField();
+		txtNegras.setBounds(149, 89, 132, 20);
+		frmIniciarSesion.getContentPane().add(txtNegras);
+		txtNegras.setColumns(10);
+		
+		JLabel lblJugador = new JLabel("Jugador");
+		lblJugador.setBounds(42, 169, 57, 14);
+		frmIniciarSesion.getContentPane().add(lblJugador);
+		
+		txtOrigen = new JTextField();
+		txtOrigen.setBounds(104, 202, 86, 20);
+		frmIniciarSesion.getContentPane().add(txtOrigen);
+		txtOrigen.setColumns(10);
+		
+		JLabel lblPosicionInicial = new JLabel("Origen:");
+		lblPosicionInicial.setBounds(42, 205, 72, 14);
+		frmIniciarSesion.getContentPane().add(lblPosicionInicial);
+		
+		JLabel lblNewLabel = new JLabel("Destino:");
+		lblNewLabel.setBounds(42, 230, 46, 14);
+		frmIniciarSesion.getContentPane().add(lblNewLabel);
+		
+		txtDestino = new JTextField();
+		txtDestino.setBounds(104, 227, 86, 20);
+		frmIniciarSesion.getContentPane().add(txtDestino);
+		txtDestino.setColumns(10);
+		
+		JButton btnMover = new JButton("Mover");
+		btnMover.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {				
+				mover();
+			}
+
+		});
+		btnMover.setBounds(104, 258, 89, 23);
+		frmIniciarSesion.getContentPane().add(btnMover);
+		
+		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setBounds(104, 292, 89, 23);
+		frmIniciarSesion.getContentPane().add(btnGuardar);
 	}
 	
 	protected void BotonIngresar(){
-		ABMPartida.invocador();
-		//Acá escribir todas las funciones del boton
-		this.frmIniciarSesion.setVisible(false);
+		
+		//optimizar con mapearDeDatos
+		Jugador j1 = ctrlJug.getByDni(txtBlancas.getText());
+		Jugador j2 = ctrlJug.getByDni(txtNegras.getText());
+
+		if (j1==null || j2==null){
+			JOptionPane.showMessageDialog(null, "Debe completar los dos jugadores", "Error",JOptionPane.INFORMATION_MESSAGE);
+		} else {
+		    Partida part = new Partida();
+			String dni1 = j1.getDni();
+			String dni2 = j2.getDni();
+			part = ctrlPart.recuperarPartida(dni1, dni2);
+			//Pasar partida al boton mover
+		} 
+		
 	}
+
+//VALIDAR QUE NO INGRESE MAS DE DOS CARACTERES. Y VALIDAR TANTO LETRAS COMO NUMEROS.
+	protected void mapearDeDatos(){
+		
+		String origen;
+		String destino;	
+		
+		origen = txtOrigen.getText();
+		pos.setLetra(origen.charAt(1)); 
+		pos.setNumero(origen.charAt(2));
+		
+		destino = txtDestino.getText();
+		pos.setLetra(destino.charAt(1)); 
+		pos.setNumero(Integer.parseInt(String.valueOf(destino.charAt(2)))); 
+
+		}
 	
 
 	private void BotonRegistrar() {
 		ABMRegistro.invocador();
 		this.frmIniciarSesion.setVisible(false);
+	}
+	//boton guardar todo de una en evento click
+	private void mover() {
+		// TODO Auto-generated method stub
+		
 	}
 }
