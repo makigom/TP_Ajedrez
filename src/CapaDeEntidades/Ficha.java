@@ -33,5 +33,10 @@ public abstract class Ficha{
 	public void setColor(char color) {
 		this.color = color;
 	}
+	
+	public boolean validarTablero(Posicion ini, Posicion fin){
+		
+		return true;
+	}
 
 }
