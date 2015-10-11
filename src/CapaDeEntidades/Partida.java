@@ -8,7 +8,7 @@ public class Partida
 	private Jugador jugadorBlanco;
 	private Jugador jugadorNegro;
 	private String turno;
-	ArrayList<Ficha> fichas ;
+	private ArrayList<Ficha> fichas;
 
 	public Partida() {
 		// TODO Auto-generated constructor stub
