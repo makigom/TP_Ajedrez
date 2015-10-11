@@ -28,7 +28,9 @@ public class ABMIniciarSesion {
 
 	private CtrlJugador ctrlJug = new CtrlJugador();
 	private CtrlPartida ctrlPart = new CtrlPartida();
-	private Posicion pos = new Posicion();
+    Partida part = new Partida();
+	private Posicion posOrigen = new Posicion();
+	private Posicion posDestino = new Posicion();
 	private JTextField txtOrigen;
 	private JTextField txtDestino;
 	
@@ -130,7 +132,7 @@ public class ABMIniciarSesion {
 		btnMover.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {				
-				mover();
+				botonMover();
 			}
 
 		});
@@ -138,6 +140,13 @@ public class ABMIniciarSesion {
 		frmIniciarSesion.getContentPane().add(btnMover);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				botonGuardar();
+			}
+
+		});
 		btnGuardar.setBounds(104, 292, 89, 23);
 		frmIniciarSesion.getContentPane().add(btnGuardar);
 	}
@@ -151,38 +160,42 @@ public class ABMIniciarSesion {
 		if (j1==null || j2==null){
 			JOptionPane.showMessageDialog(null, "Debe completar los dos jugadores", "Error",JOptionPane.INFORMATION_MESSAGE);
 		} else {
-		    Partida part = new Partida();
+			
 			String dni1 = j1.getDni();
 			String dni2 = j2.getDni();
 			part = ctrlPart.recuperarPartida(dni1, dni2);
-			//Pasar partida al boton mover
+			//Pasar partida al boton mover - HECHO CON VARIABLE DE CLASE
 		} 
 		
 	}
-
-//VALIDAR QUE NO INGRESE MAS DE DOS CARACTERES. Y VALIDAR TANTO LETRAS COMO NUMEROS.
-	protected void mapearDeDatos(){
-		
-		String origen;
-		String destino;	
-		
-		origen = txtOrigen.getText();
-		pos.setLetra(origen.charAt(1)); 
-		pos.setNumero(origen.charAt(2));
-		
-		destino = txtDestino.getText();
-		pos.setLetra(destino.charAt(1)); 
-		pos.setNumero(Integer.parseInt(String.valueOf(destino.charAt(2)))); 
-
-		}
-	
 
 	private void BotonRegistrar() {
 		ABMRegistro.invocador();
 		this.frmIniciarSesion.setVisible(false);
 	}
+	
+//VALIDAR QUE NO INGRESE MAS DE DOS CARACTERES. Y VALIDAR TANTO LETRAS COMO NUMEROS.
+	private void botonMover() {
+		//cambio pos por posOrigen y posDestino, con pos solo se sobreescribia el origen con el destino
+
+		String origen;
+		String destino;	
+		
+		origen = txtOrigen.getText();
+		posOrigen.setLetra(origen.charAt(1)); 
+		posOrigen.setNumero(origen.charAt(2));
+		
+		destino = txtDestino.getText();
+		posDestino.setLetra(destino.charAt(1)); 
+		posDestino.setNumero(Integer.parseInt(String.valueOf(destino.charAt(2)))); 
+
+		if(ctrlPart.validarJugada(posOrigen, posDestino, part)) JOptionPane.showMessageDialog(null,"Movimiento realizado con éxito","Ajedrez", JOptionPane.INFORMATION_MESSAGE);
+		else JOptionPane.showMessageDialog(null,"Movimiento no valido","Error", JOptionPane.ERROR_MESSAGE);
+		
+	}
+	
 	//boton guardar todo de una en evento click
-	private void mover() {
+	private void botonGuardar() {
 		// TODO Auto-generated method stub
 		
 	}

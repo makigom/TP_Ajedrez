@@ -21,4 +21,10 @@ public class CtrlPartida {
 		
 		return partida;
 	}
+
+	public boolean validarJugada(Posicion posOrigen, Posicion posDestino, Partida part) {
+		
+		return datosPartida.validarJugada(posOrigen, posDestino, part);
+		
+	}
 }
