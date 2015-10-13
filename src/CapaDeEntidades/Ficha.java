@@ -5,12 +5,17 @@ public abstract class Ficha{
 	private int idFicha;
 	private boolean estado;
 	private char color;
+	private static char tipo;
 	
-
-	public boolean validarMovimiento() {
-		return false;
+	public static char getTipo() {
+		return tipo;
 	}
-	public boolean validarPosicion() {
+
+	public static void setTipo(char tipo) {
+		Ficha.tipo = tipo;
+	}
+
+	public boolean validarMovimiento(Posicion ini, Posicion fin) {
 		return false;
 	}
 	
@@ -34,9 +39,4 @@ public abstract class Ficha{
 		this.color = color;
 	}
 	
-	public boolean validarTablero(Posicion ini, Posicion fin){
-		
-		return true;
-	}
-
 }

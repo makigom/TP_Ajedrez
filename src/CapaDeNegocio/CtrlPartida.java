@@ -24,7 +24,8 @@ public class CtrlPartida {
 
 	public boolean validarJugada(Posicion posOrigen, Posicion posDestino, Partida part) {
 		
-		return datosPartida.validarJugada(posOrigen, posDestino, part);
+		return datosPartida.getFicha(posOrigen, posDestino, part);
+		//metodo datosPartida.cambiarPosicion si validarMovimiento de la ficha indicada da true
 		
 	}
 }
