@@ -1,24 +1,14 @@
 package CapaDeEntidades;
 
-import java.util.ArrayList;
-
 public class Alfil extends Ficha {
 
 	@Override
-	public boolean validarMovimiento() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public boolean validarMovimiento(Posicion ini, Posicion fin) {
 
-	@Override
-	public boolean validarPosicion() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		//falta validar que si en su camino se encuentra otra pieza, no puede moverse mas alla de esta
+		if ((ini.getLetra() != fin.getLetra()) && (ini.getNumero() != fin.getNumero()) && (fin.getNumero()<= 8) && (fin.getNumero()>=1) && (fin.getLetra() <= 'a') && (fin.getLetra() >= 'h')) return true;	
+		else return false;
 	
-	//pasar array de tipo ficha a un metodo estatico
-	public static void setearPosiciones(ArrayList<Ficha> fichas){
-		
 	}
 
 }
