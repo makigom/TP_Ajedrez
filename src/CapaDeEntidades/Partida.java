@@ -8,13 +8,13 @@ public class Partida
 	private Jugador jugadorBlanco;
 	private Jugador jugadorNegro;
 	private String turno;
-	private Ficha[] fichas = new Ficha[32];
+	private ArrayList<Ficha> fichas;
 
-	public Ficha[] getFichas() {
+	public ArrayList<Ficha> getFichas() {
 		return fichas;
 	}
 
-	public void setFichas(Ficha[] fichas) {
+	public void setFichas(ArrayList<Ficha> fichas) {
 		this.fichas = fichas;
 	}
 
