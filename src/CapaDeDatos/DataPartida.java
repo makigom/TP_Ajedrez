@@ -3,8 +3,10 @@ package CapaDeDatos;
 import java.sql.*;
 
 import appExceptions.ApplicationException;
+import CapaDeEntidades.Ficha;
 import CapaDeEntidades.Jugador;
 import CapaDeEntidades.Partida;
+import CapaDeEntidades.Posicion;
 
 public class DataPartida {
 
@@ -13,6 +15,7 @@ public class DataPartida {
 	}
 	
 	public Partida buscarPartida(String dni1, String dni2) {
+		//en buscar partida deberia devolver tambien los jugadores que busca
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
 		Partida part = null;
@@ -22,6 +25,7 @@ public class DataPartida {
 			stmt.setString(1, dni1);
 			stmt.setString(2, dni2);
 			rs = stmt.executeQuery(); 
+			
 			if(rs !=null && rs.next()){
 				part = new Partida();
 				part.setIdPartida(rs.getInt("idPartida")); 
@@ -91,6 +95,53 @@ public class DataPartida {
 		}
 	
 		return part;
+	}
+
+	public boolean validarJugada(Posicion posOrigen, Posicion posDestino, Partida part) {
+		
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		Ficha fic;
+		
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select idFicha from fichas inner join posiciones on fichas.idFicha = posiciones.idFicha where posiciones.letra = ? and posiciones.numero = ?" );
+			
+			stmt.setString(1, String.valueOf(posOrigen.getLetra()));
+			stmt.setInt(2, posOrigen.getNumero());
+			stmt.execute();
+			
+			if(rs !=null && rs.next()){
+				// hay que buscar el tipo de ficha con el idFicha y llamar a la subclase relacionada al id
+			}
+			
+		}
+				
+		catch(SQLException e){
+			
+			e.printStackTrace();	
+		}
+		finally{
+			
+			try {
+				
+				if(rs != null) rs.close();
+				if(stmt != null) stmt.close();
+				
+			} catch(SQLException e){
+				
+				e.printStackTrace();
+				
+			}
+			finally{
+				
+				FactoryConexion.getInstancia().releaseConn();
+				
+			}
+			
+		}
+	
+
+		return false;
 	}
 		
 	}
