@@ -20,7 +20,6 @@ public abstract class Ficha{
 		Caballo.SetCaballos();
 		
 		
-		
 	}
 	
 	public Posicion getPosicion() {

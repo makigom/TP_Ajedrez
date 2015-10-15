@@ -20,7 +20,7 @@ public class CtrlPartida {
 		if(datosPartida.buscarPartida(dni1,dni2) == null){ 
 			ArrayList<Ficha> fichas = new ArrayList<Ficha>();
 			partida = datosPartida.crearPartida(dni1, dni2);
-			fichas = Ficha.SetearFichas();
+			Ficha.SetearFichas(fichas);
 			partida.setFichas(fichas);
 		}
 		else partida = datosPartida.buscarPartida(dni1,dni2);
