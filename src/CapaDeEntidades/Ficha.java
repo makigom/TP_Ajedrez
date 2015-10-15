@@ -20,6 +20,10 @@ public abstract class Ficha{
 		return false;
 	}
 	
+	public boolean validarMovimiento(Posicion ini, Posicion fin, char color) {
+		return false;
+	}
+	
 	public int getIdFicha() {
 		return idFicha;
 	}
