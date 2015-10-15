@@ -8,4 +8,9 @@ public class Rey extends Ficha {
 		return false;
 	}
 
+	public static void SetReyes() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

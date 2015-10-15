@@ -11,4 +11,9 @@ public class Alfil extends Ficha {
 	
 	}
 
+	public static void SetAlfiles() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
