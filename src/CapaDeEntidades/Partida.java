@@ -10,6 +10,14 @@ public class Partida
 	private String turno;
 	private ArrayList<Ficha> fichas;
 
+	public ArrayList<Ficha> getFichas() {
+		return fichas;
+	}
+
+	public void setFichas(ArrayList<Ficha> fichas) {
+		this.fichas = fichas;
+	}
+
 	public Partida() {
 		// TODO Auto-generated constructor stub
 	}

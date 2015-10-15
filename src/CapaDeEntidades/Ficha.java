@@ -1,5 +1,7 @@
 package CapaDeEntidades;
 
+import java.util.ArrayList;
+
 public abstract class Ficha{
 	
 	private int idFicha;
@@ -8,6 +10,19 @@ public abstract class Ficha{
 	private Posicion posicion; 
 	
 
+	public static void SetearFichas(ArrayList<Ficha> fichas){
+		
+		Peon.setPeones();
+		Torre.SetTorres();
+		Alfil.SetAlfiles();
+		Rey.SetReyes();
+		Dama.SetDamas();
+		Caballo.SetCaballos();
+		
+		
+		
+	}
+	
 	public Posicion getPosicion() {
 		return posicion;
 	}

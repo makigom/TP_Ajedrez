@@ -14,4 +14,9 @@ public class Dama extends Ficha {
 		else return false;
 	}
 
+	public static void SetDamas() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

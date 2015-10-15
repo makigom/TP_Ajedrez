@@ -18,4 +18,9 @@ public class Caballo extends Ficha {
 		
 	}
 
+	public static void SetCaballos() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
