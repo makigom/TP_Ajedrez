@@ -164,7 +164,6 @@ public class ABMIniciarSesion {
 			String dni1 = j1.getDni();
 			String dni2 = j2.getDni();
 			part = ctrlPart.recuperarPartida(dni1, dni2);
-			part.
 			//Pasar partida al boton mover - HECHO CON VARIABLE DE CLASE
 		} 
 		
