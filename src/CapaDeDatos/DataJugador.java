@@ -4,7 +4,6 @@ import java.sql.*;
 
 import appExceptions.ApplicationException;
 import CapaDeEntidades.Jugador;
-import CapaDeNegocio.CtrlJugador;
 
 public class DataJugador {
 	

@@ -97,14 +97,14 @@ public class DataPartida {
 		return part;
 	}
 
-	public boolean validarJugada(Posicion posOrigen, Posicion posDestino, Partida part) {
+	public boolean getFicha(Posicion posOrigen, Posicion posDestino,Partida part) {
 		
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
 		Ficha fic;
 		
 		try {
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select idFicha from fichas inner join posiciones on fichas.idFicha = posiciones.idFicha where posiciones.letra = ? and posiciones.numero = ?" );
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select idFicha, estadoFicha, color from fichas inner join posiciones on fichas.idFicha = posiciones.idFicha inner join partidas on partidas.idPartida = posiciones.idPartida where posiciones.letra = ? and posiciones.numero = ?" );
 			
 			stmt.setString(1, String.valueOf(posOrigen.getLetra()));
 			stmt.setInt(2, posOrigen.getNumero());
@@ -112,6 +112,7 @@ public class DataPartida {
 			
 			if(rs !=null && rs.next()){
 				// hay que buscar el tipo de ficha con el idFicha y llamar a la subclase relacionada al id
+				return true;
 			}
 			
 		}
@@ -140,10 +141,10 @@ public class DataPartida {
 			
 		}
 	
-
 		return false;
+
 	}
 		
-	}
+}
 
 

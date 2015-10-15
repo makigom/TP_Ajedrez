@@ -177,7 +177,6 @@ public class ABMIniciarSesion {
 //VALIDAR QUE NO INGRESE MAS DE DOS CARACTERES. Y VALIDAR TANTO LETRAS COMO NUMEROS.
 	private void botonMover() {
 		//cambio pos por posOrigen y posDestino, con pos solo se sobreescribia el origen con el destino
-
 		String origen;
 		String destino;	
 		

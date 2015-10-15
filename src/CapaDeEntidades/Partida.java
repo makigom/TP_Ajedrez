@@ -1,14 +1,11 @@
 package CapaDeEntidades;
 
-import java.util.ArrayList;
-
 public class Partida 
 {
 	private int idPartida;
 	private Jugador jugadorBlanco;
 	private Jugador jugadorNegro;
 	private String turno;
-	private ArrayList<Ficha> fichas;
 
 	public Partida() {
 		// TODO Auto-generated constructor stub

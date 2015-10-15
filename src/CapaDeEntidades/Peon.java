@@ -4,13 +4,7 @@ public class Peon extends Ficha
 {
 
 	@Override
-	public boolean validarMovimiento() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean validarPosicion() {
+	public boolean validarMovimiento(Posicion ini, Posicion fin) {
 		// TODO Auto-generated method stub
 		return false;
 	}
