@@ -10,14 +10,14 @@ public abstract class Ficha{
 	private Posicion posicion; 
 	
 
-	public static void SetearFichas(ArrayList<Ficha> fichas){
+	public static void SetearFichas(Ficha[] fichas){
 		
 		Peon.setPeones();
-		Torre.SetTorres();
-		Alfil.SetAlfiles();
-		Rey.SetReyes();
-		Dama.SetDamas();
-		Caballo.SetCaballos();
+		Torre.SetTorres(fichas);
+		Alfil.SetAlfiles(fichas);
+		Rey.SetReyes(fichas);
+		Dama.SetDamas(fichas);
+		Caballo.SetCaballos(fichas);
 		
 		
 	}

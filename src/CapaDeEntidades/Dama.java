@@ -1,5 +1,8 @@
 package CapaDeEntidades;
 
+import java.util.ArrayList;
+
+
 public class Dama extends Ficha {
 
 	@Override
@@ -14,8 +17,12 @@ public class Dama extends Ficha {
 		else return false;
 	}
 
-	public static void SetDamas() {
-		// TODO Auto-generated method stub
+	public static void SetDamas(Ficha[] fichas) {
+		 for (int i=0; i<2; i++) {
+		        fichas[i] = new Dama();
+		        fichas[i].setColor('b');
+		    }
+		
 		
 	}
 
