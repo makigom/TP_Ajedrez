@@ -1,6 +1,9 @@
 package CapaDeNegocio;
 
 import CapaDeEntidades.*;
+
+import java.util.ArrayList;
+
 import CapaDeDatos.*;
 
 public class CtrlPartida {
@@ -15,7 +18,10 @@ public class CtrlPartida {
 
 	public Partida recuperarPartida(String dni1, String dni2) {
 		if(datosPartida.buscarPartida(dni1,dni2) == null){ 
-			partida = datosPartida.crearPartida(dni1, dni2);			
+			ArrayList<Ficha> fichas = new ArrayList<Ficha>();
+			partida = datosPartida.crearPartida(dni1, dni2);
+			fichas = Ficha.SetearFichas();
+			partida.setFichas(fichas);
 		}
 		else partida = datosPartida.buscarPartida(dni1,dni2);
 		
@@ -27,5 +33,13 @@ public class CtrlPartida {
 		return datosPartida.getFicha(posOrigen, posDestino, part);
 		//metodo datosPartida.cambiarPosicion si validarMovimiento de la ficha indicada da true
 		
+	}
+
+	public ArrayList<Ficha> setearFichas(int idPartida) {
+		
+		ArrayList<Ficha> fichas = new ArrayList<Ficha>();
+		fichas =datosPartida.obtenerFichas();
+		
+		return null;
 	}
 }
