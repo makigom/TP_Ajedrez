@@ -2,6 +2,14 @@ package CapaDeEntidades;
 
 public class Torre extends Ficha {
 
+	public Torre(char i, int j, char c, boolean b, int id){
+		this.posicion.setNumero(j);
+		this.posicion.setLetra(i);
+		this.setColor(c);
+		this.setEstado(b);
+		this.setIdFicha(id);
+		
+	}
 	
 	public boolean validarMovimiento(Posicion ini, Posicion fin){
 
@@ -23,8 +31,4 @@ public class Torre extends Ficha {
 		 else return false;
 	}
 
-	public static void SetTorres() {
-		// TODO Auto-generated method stub
-		
-	}
 }

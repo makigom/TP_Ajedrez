@@ -18,9 +18,10 @@ public class CtrlPartida {
 
 	public Partida recuperarPartida(String dni1, String dni2) {
 		if(datosPartida.buscarPartida(dni1,dni2) == null){ 
-			ArrayList<Ficha> fichas = new ArrayList<Ficha>();
+			ArrayList<Ficha> fichas = new ArrayList<Ficha>();			
 			partida = datosPartida.crearPartida(dni1, dni2);
-
+			Ficha.SetearFichas(fichas);
+			partida.setFichas(fichas);
 		}
 		else partida = datosPartida.buscarPartida(dni1,dni2);
 		
