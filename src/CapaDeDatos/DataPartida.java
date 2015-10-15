@@ -1,6 +1,7 @@
 package CapaDeDatos;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import appExceptions.ApplicationException;
 import CapaDeEntidades.Ficha;
@@ -98,6 +99,7 @@ public class DataPartida {
 	}
 
 	public boolean getFicha(Posicion posOrigen, Posicion posDestino,Partida part) {
+
 		
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
@@ -144,7 +146,13 @@ public class DataPartida {
 		return false;
 
 	}
+
+	public ArrayList<Ficha> obtenerFichas() {
 		
+		return null;
+	}
+	
+	
 }
 
 

@@ -22,4 +22,9 @@ public class Torre extends Ficha {
 		 }
 		 else return false;
 	}
+
+	public static void SetTorres() {
+		// TODO Auto-generated method stub
+		
+	}
 }
