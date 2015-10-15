@@ -25,9 +25,5 @@ public class Rey extends Ficha {
 		
 	}
 
-	public static void SetReyes() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

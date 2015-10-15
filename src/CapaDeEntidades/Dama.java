@@ -5,6 +5,14 @@ import java.util.ArrayList;
 
 public class Dama extends Ficha {
 
+	public Dama(char i, int j, char c, boolean b, int id) {
+		this.posicion.setNumero(j);
+		this.posicion.setLetra(i);
+		this.setColor(c);
+		this.setEstado(b);
+		this.setIdFicha(id);
+	}
+
 	@Override
 	public boolean validarMovimiento(Posicion ini, Posicion fin) {
 		
@@ -17,16 +25,6 @@ public class Dama extends Ficha {
 		else return false;
 	}
 
-	public static void SetDamas(Ficha[] fichas) {
-		 for (int i=0; i<2; i++) {
-			 	int a= 8;
-		        fichas[i] = new Dama();		        
-		        fichas[i].posicion.setLetra('d');
-		        fichas[i].posicion.setNumero(a);
-		        if(i%2 == 0) fichas[i].setColor('B');
-		        else fichas[i].setColor('N');
-		        a -= 7;
-		    }
 		
 		
 	}

@@ -2,6 +2,14 @@ package CapaDeEntidades;
 
 public class Peon extends Ficha 
 {
+	public Peon(char i, int j, char c, boolean b, int id) {
+		this.posicion.setNumero(j);
+		this.posicion.setLetra(i);
+		this.setColor(c);
+		this.setEstado(b);
+		this.setIdFicha(id);
+		}
+
 	// como valido para comer? se debe mover para el costado
 	@Override
 	public boolean validarMovimiento(Posicion ini, Posicion fin, char color) {
@@ -23,9 +31,5 @@ public class Peon extends Ficha
 		else return false;
 }
 
-	public static void setPeones() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
