@@ -5,14 +5,15 @@ public abstract class Ficha{
 	private int idFicha;
 	private boolean estado;
 	private char color;
-	private static char tipo;
+	private Posicion posicion; 
 	
-	public static char getTipo() {
-		return tipo;
+
+	public Posicion getPosicion() {
+		return posicion;
 	}
 
-	public static void setTipo(char tipo) {
-		Ficha.tipo = tipo;
+	public void setPosicion(Posicion posicion) {
+		this.posicion = posicion;
 	}
 
 	public boolean validarMovimiento(Posicion ini, Posicion fin) {
