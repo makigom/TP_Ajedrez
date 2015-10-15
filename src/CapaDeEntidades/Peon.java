@@ -4,7 +4,6 @@ public class Peon extends Ficha
 {
 	// como valido para comer? se debe mover para el costado
 	@Override
-<<<<<<< HEAD
 	public boolean validarMovimiento(Posicion ini, Posicion fin, char color) {
 
 		if(color == 'B' || color == 'b'){
@@ -22,13 +21,7 @@ public class Peon extends Ficha
 			
 		}
 		else return false;
-		
-=======
-	public boolean validarMovimiento(Posicion ini, Posicion fin) {
-		// TODO Auto-generated method stub 
-		return false;
->>>>>>> origin/master
-	}
+}
 
 	public static void setPeones() {
 		// TODO Auto-generated method stub
