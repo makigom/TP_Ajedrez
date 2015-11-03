@@ -9,12 +9,6 @@ public abstract class Ficha{
 	private char color;
 	private Posicion posicion; 
 	
-	public boolean validarTablero(Posicion ini, Posicion fin){
-		
-		if((fin.getNumero()<= 8) && (fin.getNumero()>=1) && (fin.getLetra() <= 'a') && (fin.getLetra() >= 'h'))return true;
-		else return false;
-		
-	}
 
 	public static void SetearFichas(ArrayList<Ficha> fichas){
 		
@@ -23,7 +17,9 @@ public abstract class Ficha{
 		Alfil.SetAlfiles();
 		Rey.SetReyes();
 		Dama.SetDamas();
-		Caballo.SetCaballos();	
+		Caballo.SetCaballos();
+		
+		
 		
 	}
 	

@@ -12,7 +12,6 @@ public class DataJugador {
 	}
 
 	public Jugador getByDni(String dni) {
-		
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
 		Jugador j = null;

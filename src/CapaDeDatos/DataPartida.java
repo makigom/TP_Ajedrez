@@ -1,4 +1,5 @@
 package CapaDeDatos;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -10,14 +11,11 @@ import CapaDeEntidades.Posicion;
 
 public class DataPartida {
 
-	private DataJugador dj;
-
 	public DataPartida(){
 		
 	}
 	
 	public Partida buscarPartida(String dni1, String dni2) {
-		
 		//en buscar partida deberia devolver tambien los jugadores que busca
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
@@ -33,7 +31,9 @@ public class DataPartida {
 				part = new Partida();
 				part.setIdPartida(rs.getInt("idPartida")); 
 				part.setTurno(rs.getString("turno"));
-				//YA SE ME OCURRIO, usar el metodo e DataJugador y completar los dos jugadores buscandolos con el dni, y hacer aca mismo otro metodo buscarFichas que complete el arreglo que tiene que devolver para el objeto partida
+				//PREGUNTAR!!!!
+				//part.setJugadorBlanco.
+				//part.setJugadorNegro(rs.getString("dniJugadorNegro"));
 			}
 		} catch (SQLException e){			
 			e.printStackTrace();
@@ -48,12 +48,6 @@ public class DataPartida {
 			}
 			FactoryConexion.getInstancia().releaseConn();
 		}
-		
-		DataJugador dj = new DataJugador();
-		part.setJugadorBlanco(dj.getByDni(dni1));
-		part.setJugadorNegro(dj.getByDni(dni2));
-		
-		
 		return part;
 	}
 
