@@ -16,9 +16,15 @@ public abstract class Ficha{
 	public void setPosicion(Posicion posicion) {
 		this.posicion = posicion;
 	}
-
 	
-	public static void SetearFichas(ArrayList<Ficha> fichas){
+	public boolean validarTablero(Posicion fin){
+		
+		if((fin.getNumero() <= 8) && (fin.getNumero()>=1) && (fin.getLetra() >= 'a') && (fin.getLetra() <= 'h') ) return true;
+		else return false;	
+		
+	}
+	
+	public static void setearFichas(ArrayList<Ficha> fichas){
 	
 		int id = 0;
 		

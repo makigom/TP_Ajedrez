@@ -31,9 +31,6 @@ public class DataPartida {
 				part = new Partida();
 				part.setIdPartida(rs.getInt("idPartida")); 
 				part.setTurno(rs.getString("turno"));
-				//PREGUNTAR!!!!
-				//part.setJugadorBlanco.
-				//part.setJugadorNegro(rs.getString("dniJugadorNegro"));
 			}
 		} catch (SQLException e){			
 			e.printStackTrace();
@@ -48,6 +45,11 @@ public class DataPartida {
 			}
 			FactoryConexion.getInstancia().releaseConn();
 		}
+		
+		//Se le asignan los jugadores a la partida, falta asignarle el array de fichas
+		DataJugador jug = new DataJugador();
+		part.setJugadorBlanco(jug.getByDni(dni1));
+		part.setJugadorNegro(jug.getByDni(dni2));
 		return part;
 	}
 
@@ -59,7 +61,7 @@ public class DataPartida {
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into partidas(turno, dniJugadorBlanco, dniJugadorNegro) values (?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			
-			stmt.setString(1, part.getTurno());
+			stmt.setString(1, part.getTurno()); // ver
 			stmt.setString(2, dni1);
 			stmt.setString(3, dni2);
 			stmt.execute();

@@ -16,12 +16,12 @@ public class Torre extends Ficha {
 		// correcciones que no deje mover al mismo lugar y validacion de letra en el elseif
 		//falta validar que si en su camino se encuentra otra pieza, no puede moverse mas alla de esta
 				 
-		 if ((ini.getLetra() == fin.getLetra()) && (fin.getNumero()<= 8) && (fin.getNumero()>=1) && (ini.getNumero() != fin.getNumero())){
+		 if ((ini.getLetra() == fin.getLetra()) && validarTablero(fin) && (ini.getNumero() != fin.getNumero())){
 			 
 			
 			return true;
 		 }
-		 else if ((ini.getNumero() == fin.getNumero()) && (fin.getLetra() >= 'a') && (fin.getLetra() <= 'h') && (ini.getLetra() != fin.getLetra())){
+		 else if ((ini.getNumero() == fin.getNumero()) && validarTablero(fin) && (ini.getLetra() != fin.getLetra())){
 			 
 			 //ini.setLetra(fin.getLetra());
 			 //ini.setNumero(fin.getNumero());
