@@ -38,30 +38,40 @@ public class DataPartida {
 		finally{
 			
 			try{
+				
 				if(rs != null) rs.close();
 				if(stmt != null) stmt.close();
+				
 			} catch (SQLException e){
+				
 				e.printStackTrace();
+				
 			}
 			FactoryConexion.getInstancia().releaseConn();
 		}
 		
 		//Se le asignan los jugadores a la partida, falta asignarle el array de fichas
-		DataJugador jug = new DataJugador();
-		part.setJugadorBlanco(jug.getByDni(dni1));
-		part.setJugadorNegro(jug.getByDni(dni2));
+		DataJugador datJug = new DataJugador();
+		DataFicha datFic = new DataFicha(); 
+		part.setJugadorBlanco(datJug.getByDni(dni1));
+		part.setJugadorNegro(datJug.getByDni(dni2));
+		//se asigna en arreglo de fichas
+		part.setFichas(datFic.buscarFichas(part.getIdPartida()));
 		return part;
+		
 	}
 
-	public Partida crearPartida(String dni1, String dni2) {
+	public Partida crearPartida(String dni1, String dni2) {//QUEDAMOS ACA 4/11 VER TURNO SI PONERLO EN BOOL O DEJARLO INT
+		
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
 		Partida part = new Partida();
 		
 		try {
+			
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into partidas(turno, dniJugadorBlanco, dniJugadorNegro) values (?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			
-			stmt.setString(1, part.getTurno()); // ver
+			stmt.setString(1, part.set); // ver
 			stmt.setString(2, dni1);
 			stmt.setString(3, dni2);
 			stmt.execute();
@@ -96,65 +106,12 @@ public class DataPartida {
 			}
 			
 		}
-	
+		
+		//fichas = Ficha.setearFichas();
+		//partida.setFichas(fichas);
 		return part;
 	}
 
-	public boolean getFicha(Posicion posOrigen, Posicion posDestino,Partida part) {
-
-		
-		ResultSet rs = null;
-		PreparedStatement stmt = null;
-		Ficha fic;
-		
-		try {
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select idFicha, estadoFicha, color from fichas inner join posiciones on fichas.idFicha = posiciones.idFicha inner join partidas on partidas.idPartida = posiciones.idPartida where posiciones.letra = ? and posiciones.numero = ?" );
-			
-			stmt.setString(1, String.valueOf(posOrigen.getLetra()));
-			stmt.setInt(2, posOrigen.getNumero());
-			stmt.execute();
-			
-			if(rs !=null && rs.next()){
-				// hay que buscar el tipo de ficha con el idFicha y llamar a la subclase relacionada al id
-				return true;
-			}
-			
-		}
-				
-		catch(SQLException e){
-			
-			e.printStackTrace();	
-		}
-		finally{
-			
-			try {
-				
-				if(rs != null) rs.close();
-				if(stmt != null) stmt.close();
-				
-			} catch(SQLException e){
-				
-				e.printStackTrace();
-				
-			}
-			finally{
-				
-				FactoryConexion.getInstancia().releaseConn();
-				
-			}
-			
-		}
-	
-		return false;
-
-	}
-
-	public ArrayList<Ficha> obtenerFichas() {
-		
-		return null;
-	}
-	
-	
 }
 
 

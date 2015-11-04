@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Dama extends Ficha {
 
-	public Dama(char i, int j, char c, boolean b, int id) {
+	public Dama(char i, int j, String c, boolean b, int id) {
 		this.posicion.setNumero(j);
 		this.posicion.setLetra(i);
 		this.setColor(c);

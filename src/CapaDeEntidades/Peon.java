@@ -2,7 +2,7 @@ package CapaDeEntidades;
 
 public class Peon extends Ficha 
 {
-	public Peon(char i, int j, char c, boolean b, int id) {
+	public Peon(char i, int j, String c, boolean b, int id) {
 		this.posicion.setNumero(j);
 		this.posicion.setLetra(i);
 		this.setColor(c);

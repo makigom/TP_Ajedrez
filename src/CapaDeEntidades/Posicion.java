@@ -8,14 +8,14 @@ public class Posicion {
 	public char getLetra() {
 		return letra;
 	}
-	public void setLetra(char c) {
-		this.letra = c;
+	public void setLetra(char letra) {
+		this.letra = letra;
 	}
 	public int getNumero() {
 		return numero;
 	}
-	public void setNumero(int i) {
-		this.numero = i;
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 
 }

@@ -3,7 +3,7 @@ package CapaDeEntidades;
 public class Caballo extends Ficha {
 	
 	
-	public Caballo(char i, int j, char c, boolean b, int id) {
+	public Caballo(char i, int j, String c, boolean b, int id) {
 		this.posicion.setNumero(j);
 		this.posicion.setLetra(i);
 		this.setColor(c);
