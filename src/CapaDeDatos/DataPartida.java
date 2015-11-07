@@ -16,10 +16,10 @@ public class DataPartida {
 	}
 	
 	public Partida buscarPartida(String dni1, String dni2) {
-		//en buscar partida deberia devolver tambien los jugadores que busca
+		
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
-		Partida part = null;
+		Partida part = new Partida();
 		
 		try{
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select idPartida, turno from partidas where dniJugadorBlanco = ? and dniJugadorNegro = ?");
@@ -27,11 +27,12 @@ public class DataPartida {
 			stmt.setString(2, dni2);
 			rs = stmt.executeQuery(); 
 			
-			if(rs !=null && rs.next()){
-				part = new Partida();
+			if(rs !=null && rs.next()){ 
 				part.setIdPartida(rs.getInt("idPartida")); 
-				part.setTurno(rs.getString("turno"));
+				part.setTurno(Boolean.parseBoolean(rs.getString("turno")));
 			}
+			else return null;
+			
 		} catch (SQLException e){			
 			e.printStackTrace();
 		}
@@ -61,7 +62,7 @@ public class DataPartida {
 		
 	}
 
-	public Partida crearPartida(String dni1, String dni2) {//QUEDAMOS ACA 4/11 VER TURNO SI PONERLO EN BOOL O DEJARLO INT
+	public Partida crearPartida(String dni1, String dni2) {//QUEDAMOS ACA 4/11 VER TURNO SI PONERLO EN BOOL O DEJARLO INT - HECHO
 		
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
@@ -69,9 +70,9 @@ public class DataPartida {
 		
 		try {
 			
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into partidas(turno, dniJugadorBlanco, dniJugadorNegro) values (?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into partidas(turno, dniJugadorBlanco, dniJugadorNegro) values (?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			
-			stmt.setString(1, part.set); // ver
+			stmt.setBoolean(1, true); // RESUELTO- SE COMIENZA POR DEFECTO CON LAS FICHAS BLANCAS, TRUE = BLANCAS, FALSE = NEGRAS
 			stmt.setString(2, dni1);
 			stmt.setString(3, dni2);
 			stmt.execute();
@@ -79,7 +80,7 @@ public class DataPartida {
 			rs=stmt.getGeneratedKeys();
 			
 			if(rs!=null && rs.next()){
-				part.setIdPartida(rs.getInt(1));
+				part.setIdPartida(rs.getInt("idPartida")); 
 			}
 		}
 		
@@ -107,9 +108,58 @@ public class DataPartida {
 			
 		}
 		
-		//fichas = Ficha.setearFichas();
-		//partida.setFichas(fichas);
+		part.setFichas(Ficha.setearFichas()); 
 		return part;
+		
+	}
+
+	public boolean savePartida(Partida part) { //update de la partida y de cada ficha del arreglo perteneciente a la partida, si partida finalizada? cuando finaliza?
+		
+		//update partida
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("update partidas set turno=? where idPartida=?");
+			
+			stmt.setBoolean(1, part.getTurno());
+			stmt.setInt(2, part.getIdPartida());
+			stmt.execute();			
+			
+			if(rs!=null && rs.next()){
+				//aca?
+			}
+		}
+		
+		catch(SQLException e){
+			
+			e.printStackTrace();	
+		}
+		finally{
+			
+			try {
+				
+				if(rs != null) rs.close();
+				if(stmt != null) stmt.close();
+				
+			} catch(SQLException e){
+				
+				e.printStackTrace();
+				
+			}
+			finally{
+				
+				FactoryConexion.getInstancia().releaseConn();
+				
+			}
+			
+		}
+		
+		//update fichas
+
+
+		return false;
 	}
 
 }

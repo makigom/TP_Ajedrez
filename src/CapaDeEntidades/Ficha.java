@@ -24,7 +24,7 @@ public abstract class Ficha{
 		
 	}
 	
-	public static ArrayList<Ficha> setearFichas(){ 
+	public static ArrayList<Ficha> setearFichas(){ //resolver idFicha con tema de la base de datos, sino cuando se agregue una partida nueva se van a repetir ids y no va
 	
 		int id = 0;
 		ArrayList<Ficha> fichas = new ArrayList<Ficha>();

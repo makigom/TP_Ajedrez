@@ -7,7 +7,7 @@ public class Partida
 	private int idPartida;
 	private Jugador jugadorBlanco;
 	private Jugador jugadorNegro;
-	private String turno;
+	private boolean turno;
 	private ArrayList<Ficha> fichas;
 
 	public ArrayList<Ficha> getFichas() {
@@ -46,11 +46,11 @@ public class Partida
 		this.idPartida = idPartida;
 	}
 
-	public String getTurno() {
+	public boolean getTurno() {
 		return turno;
 	}
 
-	public void setTurno(String turno) {
+	public void setTurno(boolean turno) {
 		this.turno = turno;
 	}
 		

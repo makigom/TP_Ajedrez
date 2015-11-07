@@ -158,12 +158,13 @@ public class ABMIniciarSesion {
 		Jugador j2 = ctrlJug.getByDni(txtNegras.getText());
 
 		if (j1==null || j2==null){
-			JOptionPane.showMessageDialog(null, "Debe completar los dos jugadores", "Error",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Debe completar los dos jugadores o registrarse", "Error",JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			
 			String dni1 = j1.getDni();
-			String dni2 = j2.getDni();
+			String dni2 = j2.getDni(); 
 			part = ctrlPart.recuperarPartida(dni1, dni2);
+			JOptionPane.showMessageDialog(null, "Partida Cargada con exito","Ajedrez",JOptionPane.INFORMATION_MESSAGE);
 			//Pasar partida al boton mover - HECHO CON VARIABLE DE CLASE
 		} 
 		
@@ -174,7 +175,7 @@ public class ABMIniciarSesion {
 		this.frmIniciarSesion.setVisible(false);
 	}
 	
-//VALIDAR QUE NO INGRESE MAS DE DOS CARACTERES. Y VALIDAR TANTO LETRAS COMO NUMEROS.
+//VALIDAR QUE NO INGRESE MAS DE DOS CARACTERES. Y VALIDAR TANTO LETRAS COMO NUMEROS. 5/11 MANEJAR EXCEPCION DE CAMPOS VACIOS
 	private void botonMover() {
 		//cambio pos por posOrigen y posDestino, con pos solo se sobreescribia el origen con el destino
 		String origen;
@@ -182,22 +183,25 @@ public class ABMIniciarSesion {
 		
 		origen = txtOrigen.getText();
 		posOrigen.setLetra(origen.charAt(1)); 
-		posOrigen.setNumero(origen.charAt(2));
+		posOrigen.setNumero(Integer.parseInt(String.valueOf(origen.charAt(2))));
 		
 		destino = txtDestino.getText();
 		posDestino.setLetra(destino.charAt(1)); 
 		posDestino.setNumero(Integer.parseInt(String.valueOf(destino.charAt(2)))); 
 
 		if(ctrlPart.validarJugada(posOrigen, posDestino, part)) JOptionPane.showMessageDialog(null,"Movimiento realizado con éxito","Ajedrez", JOptionPane.INFORMATION_MESSAGE);
-		else JOptionPane.showMessageDialog(null,"Movimiento no valido","Error", JOptionPane.ERROR_MESSAGE);
+		else JOptionPane.showMessageDialog(null,"Movimiento no valido","Error", JOptionPane.ERROR_MESSAGE); 
+		
+		if(part.getTurno() == false) part.setTurno(true);
+		if(part.getTurno() == true) part.setTurno(false);
 		
 	}
 	
 	//boton guardar todo de una en evento click
 	private void botonGuardar() {
 		// TODO Auto-generated method stub
-		//Acà habria que llamar a un metodo que valide si las posiciones de inicio y fin ingresadas
-		// se encuenran dentro del tablero, y desp de ahi, ocuparse de validar los movs dependiendo de la ficha
+		if(ctrlPart.guardarPartida(part)) JOptionPane.showMessageDialog(null,"Partida guardada con exito","Ajedrez",JOptionPane.INFORMATION_MESSAGE);
+		else JOptionPane.showMessageDialog(null,"No se ha podido guardar la partida","Ajedrez",JOptionPane.ERROR_MESSAGE);
 		
 	}
 }
