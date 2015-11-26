@@ -28,7 +28,7 @@ public class DataFicha
 			stmt.setString(1, String.valueOf(idPartida));
 			rs = stmt.executeQuery();
 			
-			if(rs !=null && rs.next()){
+			while(rs !=null && rs.next()){
 				String color = rs.getString("color"); 
 				int idFicha = rs.getInt("idFicha");
 				boolean estadoFicha = rs.getBoolean("estadoFicha");				
@@ -36,11 +36,17 @@ public class DataFicha
 				
 				switch (tipoFicha) {
 					case 'A': fic = new Alfil(idFicha, color, estadoFicha);
+					break;
 					case 'C': fic = new Caballo(idFicha, color, estadoFicha);
+					break;
 					case 'D': fic = new Dama(idFicha, color, estadoFicha);
+					break;
 					case 'P': fic = new Peon(idFicha, color, estadoFicha);
+					break;
 					case 'R': fic = new Rey(idFicha, color, estadoFicha);
+					break;
 					case 'T': fic = new Torre(idFicha, color, estadoFicha);
+					break;
 				}
 				
 				fichas.add(fic);

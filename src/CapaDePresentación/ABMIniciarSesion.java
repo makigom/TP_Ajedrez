@@ -185,8 +185,8 @@ public class ABMIniciarSesion {
 			String dni2 = j2.getDni(); 
 			part = ctrlPart.recuperarPartida(dni1, dni2);
 			JOptionPane.showMessageDialog(null, "Partida Cargada con exito","Ajedrez",JOptionPane.INFORMATION_MESSAGE);
-			if(part.getTurno()) txtTurno.setText(dni1);
-			else txtTurno.setText(j1.getNombre());
+			if(part.getTurno()) txtTurno.setText(j1.getNombre());
+			else txtTurno.setText(j2.getNombre());
 			//Pasar partida al boton mover - HECHO CON VARIABLE DE CLASE
 		} 
 		
@@ -218,14 +218,22 @@ public class ABMIniciarSesion {
 			if(part.getTurno() == false){
 				part.setTurno(true) ;
 				txtTurno.setText(part.getJugadorBlanco().getNombre());
+				txtOrigen.setText(null);
+				txtDestino.setText(null);
 			}
-			if(part.getTurno() == true) {
+			else if(part.getTurno()) {
 				part.setTurno(false);
 				txtTurno.setText(part.getJugadorNegro().getNombre());
+				txtOrigen.setText(null);
+				txtDestino.setText(null);
 			}
 			
 		}
-		else JOptionPane.showMessageDialog(null,"Movimiento no valido","Error", JOptionPane.ERROR_MESSAGE);
+		else {
+			JOptionPane.showMessageDialog(null,"Movimiento no valido","Error", JOptionPane.ERROR_MESSAGE);
+			txtOrigen.setText(null);
+			txtDestino.setText(null);
+		}
 		
 	}
 	

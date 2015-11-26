@@ -5,6 +5,7 @@ public class Torre extends Ficha {
 		this.setIdFicha(id);
 		this.setColor(c);
 		this.setEstado(b);
+		this.setTipoFicha('T');
 	}
 
 	public Torre(char i, int j, String c, boolean b, int id){

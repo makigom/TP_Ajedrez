@@ -5,6 +5,7 @@ public class Caballo extends Ficha {
 		this.setIdFicha(id);
 		this.setColor(c);
 		this.setEstado(b);
+		this.setTipoFicha('C');
 	}
 	
 	public Caballo(char i, int j, String c, boolean b, int id) {

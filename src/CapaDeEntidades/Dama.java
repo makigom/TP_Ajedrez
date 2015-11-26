@@ -5,6 +5,7 @@ public class Dama extends Ficha {
 		this.setIdFicha(id);
 		this.setColor(c);
 		this.setEstado(b);
+		this.setTipoFicha('D');
 	}
 
 	public Dama(char i, int j, String c, boolean b, int id) {
