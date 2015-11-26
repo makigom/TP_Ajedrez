@@ -1,16 +1,20 @@
 package CapaDeEntidades;
 
-import java.util.ArrayList;
-
-
 public class Dama extends Ficha {
+	public Dama(int id, String c, boolean b){
+		this.setIdFicha(id);
+		this.setColor(c);
+		this.setEstado(b);
+	}
 
 	public Dama(char i, int j, String c, boolean b, int id) {
+		this.posicion = new Posicion();
 		this.posicion.setNumero(j);
 		this.posicion.setLetra(i);
 		this.setColor(c);
 		this.setEstado(b);
 		this.setIdFicha(id);
+		this.setTipoFicha('D');
 	}
 
 	@Override

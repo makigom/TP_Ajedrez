@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import appExceptions.ApplicationException;
 import CapaDeEntidades.*; 
 
 public class DataPosicion {
@@ -60,6 +61,84 @@ public class DataPosicion {
 		}
 		
 		return pos;
+		
+	}
+	public void crearPosicion(Ficha f, Partida p) {
+
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into posiciones(letra, numero, idFicha, idPartida) values (?,?,?,?)");
+			
+			stmt.setString(1, String.valueOf(f.getPosicion().getLetra()));
+			stmt.setInt(2, f.getPosicion().getNumero());
+			stmt.setInt(3, f.getIdFicha());
+			stmt.setInt(4, p.getIdPartida());
+			stmt.execute();
+			
+		}
+		
+		catch(SQLException e){
+			
+			e.printStackTrace();	
+		}
+		finally{
+			
+			try {
+				
+				if(rs != null) rs.close();
+				if(stmt != null) stmt.close();
+				
+			} catch(SQLException e){
+				
+				e.printStackTrace();
+				
+			}
+			finally{
+				
+				FactoryConexion.getInstancia().releaseConn();
+				
+			}
+			
+		}
+		
+	}
+	public void actualizarPosicion(Ficha f, Partida p) throws ApplicationException {
+
+		PreparedStatement stmt = null;
+		
+		try{
+			
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("update posiciones set letra=?, numero=? where posiciones.idFicha=? and posiciones.idPartida=? ;");
+			
+			stmt.setString(1, String.valueOf(f.getPosicion().getLetra()));
+			stmt.setInt(2, f.getPosicion().getNumero());
+			stmt.setInt(3, f.getIdFicha());
+			stmt.setInt(3, p.getIdPartida());			
+			stmt.execute();
+
+						
+		} catch(SQLException e){
+			
+			throw new ApplicationException("Error al actualizar posiciones", e);
+			
+		}
+		finally{
+			
+			try{
+				
+				if(stmt != null) stmt.close();
+				
+			} catch (SQLException e){
+				
+				e.printStackTrace();
+				
+			}
+			
+			FactoryConexion.getInstancia().releaseConn();
+			
+		}
 		
 	}
 

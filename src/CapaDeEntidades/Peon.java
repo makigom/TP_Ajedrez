@@ -2,12 +2,20 @@ package CapaDeEntidades;
 
 public class Peon extends Ficha 
 {
+	public Peon(int id, String c, boolean b){
+		this.setIdFicha(id);
+		this.setColor(c);
+		this.setEstado(b);
+	}
+	
 	public Peon(char i, int j, String c, boolean b, int id) {
+		this.posicion = new Posicion();
 		this.posicion.setNumero(j);
 		this.posicion.setLetra(i);
 		this.setColor(c);
 		this.setEstado(b);
 		this.setIdFicha(id);
+		this.setTipoFicha('P');
 		}
 
 	// como valido para comer? se debe mover para el costado

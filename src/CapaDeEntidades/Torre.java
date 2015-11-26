@@ -1,13 +1,20 @@
 package CapaDeEntidades;
 
 public class Torre extends Ficha {
+	public Torre(int id, String c, boolean b){
+		this.setIdFicha(id);
+		this.setColor(c);
+		this.setEstado(b);
+	}
 
 	public Torre(char i, int j, String c, boolean b, int id){
+		this.posicion = new Posicion();
 		this.posicion.setNumero(j);
 		this.posicion.setLetra(i);
 		this.setColor(c);
 		this.setEstado(b);
 		this.setIdFicha(id);
+		this.setTipoFicha('T');
 		
 	}
 	

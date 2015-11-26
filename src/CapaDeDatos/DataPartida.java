@@ -15,6 +15,9 @@ public class DataPartida {
 		
 	}
 	
+	DataJugador datJug = new DataJugador();
+	DataFicha datFic = new DataFicha(); 
+	
 	public Partida buscarPartida(String dni1, String dni2) {
 		
 		ResultSet rs = null;
@@ -52,8 +55,7 @@ public class DataPartida {
 		}
 		
 		//Se le asignan los jugadores a la partida, falta asignarle el array de fichas
-		DataJugador datJug = new DataJugador();
-		DataFicha datFic = new DataFicha(); 
+		
 		part.setJugadorBlanco(datJug.getByDni(dni1));
 		part.setJugadorNegro(datJug.getByDni(dni2));
 		//se asigna en arreglo de fichas
@@ -62,7 +64,7 @@ public class DataPartida {
 		
 	}
 
-	public Partida crearPartida(String dni1, String dni2) {//QUEDAMOS ACA 4/11 VER TURNO SI PONERLO EN BOOL O DEJARLO INT - HECHO
+	public Partida crearPartida(String dni1, String dni2) throws ApplicationException {//QUEDAMOS ACA 4/11 VER TURNO SI PONERLO EN BOOL O DEJARLO INT - HECHO
 		
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
@@ -80,7 +82,7 @@ public class DataPartida {
 			rs=stmt.getGeneratedKeys();
 			
 			if(rs!=null && rs.next()){
-				part.setIdPartida(rs.getInt("idPartida")); 
+				part.setIdPartida(rs.getInt(1)); 
 			}
 		}
 		
@@ -108,12 +110,18 @@ public class DataPartida {
 			
 		}
 		
-		part.setFichas(Ficha.setearFichas()); 
+		part.setFichas(Ficha.setearFichas());
+		for (Ficha f : part.getFichas()) {
+			
+			datFic.crearFicha(f, part);
+			
+		}
+		
 		return part;
 		
 	}
 
-	public boolean savePartida(Partida part) { //update de la partida y de cada ficha del arreglo perteneciente a la partida, si partida finalizada? cuando finaliza?
+	public boolean savePartida(Partida part) throws ApplicationException { //update de la partida y de cada ficha del arreglo perteneciente a la partida, si partida finalizada? cuando finaliza?
 		
 		//update partida
 		ResultSet rs = null;
@@ -127,9 +135,6 @@ public class DataPartida {
 			stmt.setInt(2, part.getIdPartida());
 			stmt.execute();			
 			
-			if(rs!=null && rs.next()){
-				//aca?
-			}
 		}
 		
 		catch(SQLException e){
@@ -156,8 +161,12 @@ public class DataPartida {
 			
 		}
 		
-		//update fichas
-
+		part.setFichas(Ficha.setearFichas());
+		for (Ficha f : part.getFichas()) {
+			
+			datFic.actualizarFicha(f, part);
+			
+		}
 
 		return false;
 	}

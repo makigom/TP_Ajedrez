@@ -1,6 +1,7 @@
 package CapaDePresentación;
 
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +21,8 @@ import java.awt.Button;
 
 import javax.swing.JSplitPane;
 
+import appExceptions.ApplicationException;
+
 public class ABMIniciarSesion {
 
 	private JFrame frmIniciarSesion;
@@ -33,6 +36,7 @@ public class ABMIniciarSesion {
 	private Posicion posDestino = new Posicion();
 	private JTextField txtOrigen;
 	private JTextField txtDestino;
+	private JTextField txtTurno;
 	
 	/**
 	 * Launch the application.
@@ -80,7 +84,12 @@ public class ABMIniciarSesion {
 		btnIngresar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				BotonIngresar();
+				try {
+					BotonIngresar();
+				} catch (ApplicationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		btnIngresar.setBounds(291, 67, 89, 23);
@@ -143,15 +152,26 @@ public class ABMIniciarSesion {
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				botonGuardar();
+				try {
+					botonGuardar();
+				} catch (ApplicationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
 		});
 		btnGuardar.setBounds(104, 292, 89, 23);
 		frmIniciarSesion.getContentPane().add(btnGuardar);
+		
+		txtTurno = new JTextField();
+		txtTurno.setEditable(false);
+		txtTurno.setBounds(104, 166, 86, 20);
+		frmIniciarSesion.getContentPane().add(txtTurno);
+		txtTurno.setColumns(10);
 	}
 	
-	protected void BotonIngresar(){
+	protected void BotonIngresar() throws ApplicationException{
 		
 		//optimizar con mapearDeDatos
 		Jugador j1 = ctrlJug.getByDni(txtBlancas.getText());
@@ -165,6 +185,8 @@ public class ABMIniciarSesion {
 			String dni2 = j2.getDni(); 
 			part = ctrlPart.recuperarPartida(dni1, dni2);
 			JOptionPane.showMessageDialog(null, "Partida Cargada con exito","Ajedrez",JOptionPane.INFORMATION_MESSAGE);
+			if(part.getTurno()) txtTurno.setText(dni1);
+			else txtTurno.setText(j1.getNombre());
 			//Pasar partida al boton mover - HECHO CON VARIABLE DE CLASE
 		} 
 		
@@ -176,29 +198,39 @@ public class ABMIniciarSesion {
 	}
 	
 //VALIDAR QUE NO INGRESE MAS DE DOS CARACTERES. Y VALIDAR TANTO LETRAS COMO NUMEROS. 5/11 MANEJAR EXCEPCION DE CAMPOS VACIOS
+	
 	private void botonMover() {
 		//cambio pos por posOrigen y posDestino, con pos solo se sobreescribia el origen con el destino
 		String origen;
 		String destino;	
 		
 		origen = txtOrigen.getText();
-		posOrigen.setLetra(origen.charAt(1)); 
-		posOrigen.setNumero(Integer.parseInt(String.valueOf(origen.charAt(2))));
+		posOrigen.setLetra(origen.charAt(0)); 
+		posOrigen.setNumero(Integer.parseInt(String.valueOf(origen.charAt(1))));
 		
 		destino = txtDestino.getText();
-		posDestino.setLetra(destino.charAt(1)); 
-		posDestino.setNumero(Integer.parseInt(String.valueOf(destino.charAt(2)))); 
+		posDestino.setLetra(destino.charAt(0)); 
+		posDestino.setNumero(Integer.parseInt(String.valueOf(destino.charAt(1)))); 
 
-		if(ctrlPart.validarJugada(posOrigen, posDestino, part)) JOptionPane.showMessageDialog(null,"Movimiento realizado con éxito","Ajedrez", JOptionPane.INFORMATION_MESSAGE);
-		else JOptionPane.showMessageDialog(null,"Movimiento no valido","Error", JOptionPane.ERROR_MESSAGE); 
-		
-		if(part.getTurno() == false) part.setTurno(true);
-		if(part.getTurno() == true) part.setTurno(false);
+		if(ctrlPart.validarJugada(posOrigen, posDestino, part)) {
+			
+			JOptionPane.showMessageDialog(null,"Movimiento realizado con éxito","Ajedrez", JOptionPane.INFORMATION_MESSAGE);
+			if(part.getTurno() == false){
+				part.setTurno(true) ;
+				txtTurno.setText(part.getJugadorBlanco().getNombre());
+			}
+			if(part.getTurno() == true) {
+				part.setTurno(false);
+				txtTurno.setText(part.getJugadorNegro().getNombre());
+			}
+			
+		}
+		else JOptionPane.showMessageDialog(null,"Movimiento no valido","Error", JOptionPane.ERROR_MESSAGE);
 		
 	}
 	
 	//boton guardar todo de una en evento click
-	private void botonGuardar() {
+	private void botonGuardar() throws ApplicationException {
 		// TODO Auto-generated method stub
 		if(ctrlPart.guardarPartida(part)) JOptionPane.showMessageDialog(null,"Partida guardada con exito","Ajedrez",JOptionPane.INFORMATION_MESSAGE);
 		else JOptionPane.showMessageDialog(null,"No se ha podido guardar la partida","Ajedrez",JOptionPane.ERROR_MESSAGE);
