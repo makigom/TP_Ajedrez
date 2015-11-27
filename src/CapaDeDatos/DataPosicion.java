@@ -115,13 +115,14 @@ public class DataPosicion {
 			stmt.setString(1, String.valueOf(f.getPosicion().getLetra()));
 			stmt.setInt(2, f.getPosicion().getNumero());
 			stmt.setInt(3, f.getIdFicha());
-			stmt.setInt(3, p.getIdPartida());			
+			stmt.setInt(4, p.getIdPartida());			
 			stmt.execute();
 
 						
 		} catch(SQLException e){
 			
-			throw new ApplicationException("Error al actualizar posiciones", e);
+			e.printStackTrace();;
+			//throw new ApplicationException("Error al actualizar posiciones", e);
 			
 		}
 		finally{

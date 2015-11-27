@@ -32,7 +32,7 @@ public class DataPartida {
 			
 			if(rs !=null && rs.next()){ 
 				part.setIdPartida(rs.getInt("idPartida")); 
-				part.setTurno(Boolean.parseBoolean(rs.getString("turno")));
+				part.setTurno(rs.getBoolean("turno"));
 			}
 			else return null;
 			
@@ -161,14 +161,13 @@ public class DataPartida {
 			
 		}
 		
-		part.setFichas(Ficha.setearFichas());
 		for (Ficha f : part.getFichas()) {
 			
 			datFic.actualizarFicha(f, part);
 			
 		}
 
-		return false;
+		return true;
 	}
 
 }

@@ -146,7 +146,7 @@ public class ABMRegistro {
 		Jugador j = this.mapearDeDatos();
 		try { 
 			
-			if((j.getDni().trim().isEmpty()) && (j.getApellido().trim().isEmpty()) && (j.getNombre().trim().isEmpty())) 
+			if(!(j.getDni().trim().isEmpty()) && !(j.getApellido().trim().isEmpty()) && !(j.getNombre().trim().isEmpty())) 
 				ctrlJug.save(j);
 			else throw new ApplicationException("vacio",null); //PREGUNTAR
 			
